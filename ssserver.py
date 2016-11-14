@@ -3,6 +3,7 @@ import urllib.request
 import re
 import os
 import subprocess
+import sys
 
 def getssinfo():
     with urllib.request.urlopen('https://www.dou-bi.co/sszhfx/') as h:
@@ -37,10 +38,13 @@ def getssinfo():
 #os.system('taskkill /im Shadowsocks.exe')
 with open('gui-config.json','r', encoding='utf-8') as f:
     data = json.load(f)
+info = getssinfo()
+if(info == ''):
+    sys.exit(-1)
 
 with open('gui-config.json','w', encoding='utf-8') as f:
     #for i in data['configs']:
-    data['configs'] = getssinfo()
+    data['configs'] = info
     #data = json.loads(json.dumps(data))
     print(json.dumps(data, indent=4))
     json.dump(data, f, indent=4)
