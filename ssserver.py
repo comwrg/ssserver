@@ -20,7 +20,9 @@ def getssinfo():
         for config in m:
             #print(config)
             #('216.189.158.147', '12422', 'dou-bi.co12422', 'chacha20')
-
+            # if server_port is not int than continue
+            if not config[2].isdigit():
+                continue
             data = {
                 "remarks": config[0].replace('<span style="color: #339966;"><strong>','').replace('</strong></span>','').replace('&#8211;','-'),
                 'server' : config[1],
