@@ -1,19 +1,19 @@
 import json
 import urllib.request
 import re
-import os
 import subprocess
 import sys
 
-def getssinfo():
-    with urllib.request.urlopen('https://www.dou-bi.co/sszhfx/') as h:
-        html = h.read().decode('utf-8')
 
-        pattern = '''<td width="18%">(.*)</td>
-<td width="15%">(.*)</td>
-<td width="10%">(.*)</td>
-<td width="15%">(.*)</td>
-<td width="12%">(.*)</td>'''
+
+def getssinfo(containword):
+    with urllib.request.urlopen('https://doub.io/sszhfx/') as h:
+        html = h.read().decode('utf-8')
+        pattern = '''<td>(.*?)<.*
+<td>([\d|\.]*?)</td>
+<td>(.*)</td>
+<td>(.*)</td>
+<td><a href="https://doub.io/sszhfx/" target="_blank">(.*)</a></td>'''
         #pattern = '<td width="15%">(.*)<'
         m = re.findall(pattern, html)
         configs = []
@@ -32,15 +32,21 @@ def getssinfo():
                 "auth": False,
                 "timeout": 5
             }
-            configs.append(data)
+            for w in containword:
+                if w in data['remarks']:
+                    configs.append(data)
         #print(configs)
         return configs
     
 
 #os.system('taskkill /im Shadowsocks.exe')
-with open('gui-config.json','r', encoding='utf-8') as f:
+
+with open(file='gui-config.json',mode='r', encoding='utf-8') as f:
     data = json.load(f)
-info = getssinfo()
+    #print(data)
+
+print('getssinfo()')
+info = getssinfo(['美国'])
 if(info == ''):
     sys.exit(-1)
 
