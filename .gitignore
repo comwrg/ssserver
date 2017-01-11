@@ -1,8 +1,8 @@
 # Shadowsocks file
-gui-config.json
-Shadowsocks.exe
-statistics-config.json
-pac.txt
+#gui-config.json
+#Shadowsocks.exe
+#statistics-config.json
+#pac.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
