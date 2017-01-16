@@ -13,7 +13,7 @@ def getssinfo(containword):
 <td>([\d|\.]*?)</td>
 <td>(.*)</td>
 <td>(.*)</td>
-<td><a href="https://doub.io/sszhfx/" target="_blank" style="color:#5a5a5a">(.*)</a></td>'''
+<td><a style="color: #5a5a5a;" href="https://doub.io/sszhfx/" target="_blank">(.*)</a></td>'''
         #pattern = '<td width="15%">(.*)<'
         m = re.findall(pattern, html)
         configs = []
