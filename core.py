@@ -10,7 +10,7 @@
 import urllib.request
 import re
 import base64
-
+from ping import *
 
 
 def getssinfo(url = 'https://doub.io/sszhfx/'):
@@ -29,9 +29,12 @@ def getssinfo(url = 'https://doub.io/sszhfx/'):
             list.setdefault('auth', False)
             list.setdefault('timeout', 1)
             print(list)
-            configs.append(list)
+            res = ping(host=list['server'], count=1, timeout=0.2)
+            if res.received == 1:
+                configs.append(list)
         return configs
 
 
 if __name__ == '__main__':
     getssinfo()
+
