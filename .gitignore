@@ -1,8 +1,11 @@
 # Shadowsocks file
 gui-config.json
-#Shadowsocks.exe
-#statistics-config.json
-#pac.txt
+ss_win_temp/
+Shadowsocks.exe
+statistics-config.json
+pac.txt
+user-rule.txt
+.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
