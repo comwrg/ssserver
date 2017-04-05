@@ -6,6 +6,7 @@ statistics-config.json
 pac.txt
 user-rule.txt
 .idea/
+.vs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
