@@ -13,10 +13,15 @@ import base64
 from ping import *
 
 
-def getssinfo(url = 'https://doub.io/sszhfx/'):
+def getssinfo(url = 'https://doub.bid/sszhfx/'):
+    '''
+    proxy_support = urllib.request.ProxyHandler({'http' :'127.0.0.1:1080'})
+    opener = urllib.request.build_opener(proxy_support)
+    urllib.request.install_opener(opener)
+    '''
     with urllib.request.urlopen(url) as h:
         html = h.read().decode('utf-8')
-        pattern = 'ss://(.*?)"'
+        pattern = 'ss://(.*?==)"'
         res = re.findall(pattern, html)
         configs = []
         for b64 in res:
@@ -24,14 +29,17 @@ def getssinfo(url = 'https://doub.io/sszhfx/'):
             pattern = '(?P<method>.*?):(?P<password>.*)@(?P<server>.*):(?P<server_port>.*)'
             m = re.match(pattern, info)
             #print(m.groupdict())
-            list = m.groupdict()
-            list.setdefault('remarks', '')
-            list.setdefault('auth', False)
-            list.setdefault('timeout', 1)
-            print(list)
+            listInfo = m.groupdict()
+            listInfo.setdefault('remarks', '')
+            listInfo.setdefault('auth', False)
+            listInfo.setdefault('timeout', 1)
+            print(listInfo)
+            '''
             res = ping(host=list['server'], count=1, timeout=0.2)
             if res.received == 1:
                 configs.append(list)
+            '''
+            configs.append(listInfo)
         return configs
 
 
